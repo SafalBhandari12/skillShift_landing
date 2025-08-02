@@ -1,10 +1,19 @@
 "use client";
 
-import { ArrowRight, Phone, Mail, MessageCircle, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Phone,
+  Mail,
+  MessageCircle,
+  Sparkles,
+  Menu,
+  X,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -63,7 +72,7 @@ export default function Contact() {
               </a>
 
               <a
-                href='/#about'
+                href='/about'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
                 <span className='relative'>
@@ -81,12 +90,55 @@ export default function Contact() {
                 </span>
               </a>
             </div>
+
+            {/* Mobile menu button */}
+            <div className='md:hidden'>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className='text-white hover:text-premium-blue transition-colors'
+              >
+                {isMobileMenuOpen ? (
+                  <X className='h-6 w-6' />
+                ) : (
+                  <Menu className='h-6 w-6' />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile menu */}
+          {isMobileMenuOpen && (
+            <div className='md:hidden absolute top-full left-0 right-0 bg-[rgba(59,130,246,0.95)] backdrop-blur-[25px] mt-4 rounded-2xl p-6 animate-fade-in'>
+              <div className='flex flex-col space-y-4'>
+                <a
+                  href='/'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </a>
+                <a
+                  href='/about'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </a>
+                <a
+                  href='/contact'
+                  className='text-premium-blue font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Contact Form Section */}
-      <section className='py-24 relative overflow-hidden min-h-screen flex items-center'>
+      <section className='py-12 sm:py-16 lg:py-24 relative overflow-hidden min-h-screen flex items-center'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full'>
           <div className='text-center mb-16 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
@@ -102,14 +154,14 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className='grid lg:grid-cols-2 gap-12 items-start'>
+          <div className='grid lg:grid-cols-2 gap-8 lg:gap-12 items-start'>
             {/* Contact Form */}
             <div className='animate-slide-up'>
               <h3 className='text-2xl font-semibold text-white mb-8'>
                 Send us a message
               </h3>
               <form className='glass-premium p-8 rounded-2xl shadow-xl'>
-                <div className='grid md:grid-cols-2 gap-6 mb-6'>
+                <div className='grid sm:grid-cols-2 gap-4 sm:gap-6 mb-6'>
                   <div className='group'>
                     <label className='block text-sm font-semibold text-white mb-3 font-roboto group-hover:text-blue-200 transition-colors'>
                       First Name
@@ -153,7 +205,7 @@ export default function Contact() {
                 </div>
                 <button
                   type='submit'
-                  className='w-full bg-gradient-primary text-white py-4 px-8 rounded-xl font-semibold hover:glow-premium-hover transition-all duration-300 text-lg btn-animate group'
+                  className='w-full bg-gradient-primary text-white py-3 sm:py-4 px-6 sm:px-8 rounded-xl font-semibold hover:glow-premium-hover transition-all duration-300 text-base sm:text-lg btn-animate group'
                 >
                   <span className='flex items-center justify-center'>
                     Submit Application

@@ -17,11 +17,14 @@ import {
   Shield,
   Heart,
   Play,
+  Menu,
+  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -99,40 +102,83 @@ export default function Home() {
                 </span>
               </a>
             </div>
+
+            {/* Mobile menu button */}
+            <div className='md:hidden'>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className='text-white hover:text-premium-blue transition-colors'
+              >
+                {isMobileMenuOpen ? (
+                  <X className='h-6 w-6' />
+                ) : (
+                  <Menu className='h-6 w-6' />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile menu */}
+          {isMobileMenuOpen && (
+            <div className='md:hidden absolute top-full left-0 right-0 bg-[rgba(59,130,246,0.95)] backdrop-blur-[25px] mt-4 rounded-2xl p-6 animate-fade-in'>
+              <div className='flex flex-col space-y-4'>
+                <a
+                  href='#home'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </a>
+                <a
+                  href='/about'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </a>
+                <a
+                  href='/contact'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
       <section
         id='home'
-        className='relative h-screen flex items-center justify-center overflow-hidden'
+        className='relative min-h-screen flex items-center justify-center overflow-hidden py-20 lg:py-0'
       >
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-          <div className='grid lg:grid-cols-2 gap-12 items-center'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full'>
+          <div className='grid lg:grid-cols-2 gap-8 lg:gap-12 items-center'>
             {/* Text Content */}
-            <div className='text-left animate-slide-up mt-16'>
-              <h1 className='text-4xl md:text-6xl font-bold text-white mb-6 leading-tight'>
+            <div className='text-center lg:text-left animate-slide-up mt-8 lg:mt-16'>
+              <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight'>
                 We Refine
                 <br />
                 <span className='text-blue-400 drop-shadow-2xl'>Talents</span>
               </h1>
-              <p className='text-lg text-gray-300 mb-8 max-w-2xl font-open-sans leading-relaxed'>
+              <p className='text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 font-open-sans leading-relaxed'>
                 Our high-impact training interventions, designed to boost
                 productivity, increase efficiency and turn &quot;work&quot; into
                 a super-powered adventure with cutting-edge methodologies.
               </p>
-              <div className='flex flex-col sm:flex-row gap-4 mb-8'>
+              <div className='flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start'>
                 <a href='/contact' className='inline-block'>
-                  <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
+                  <button className='w-full sm:w-auto bg-gradient-primary text-white px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
                     <span className='flex items-center'>
                       Start Your Journey
                       <ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
                     </span>
                   </button>
                 </a>
-                <button className='glass-premium border-2 border-blue-400 text-blue-400 px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 btn-animate group'>
-                  <span className='flex items-center'>
+                <button className='w-full sm:w-auto glass-premium border-2 border-blue-400 text-blue-400 px-6 sm:px-8 py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 btn-animate group'>
+                  <span className='flex items-center justify-center'>
                     <Play className='mr-2 h-4 w-4' />
                     Watch Demo
                   </span>
@@ -140,33 +186,39 @@ export default function Home() {
               </div>
 
               {/* Stats */}
-              <div className='grid grid-cols-3 gap-4 max-w-md'>
-                <div className='glass-card p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-cyan rounded-lg mb-2 mx-auto'>
-                    <Users className='h-4 w-4 text-white' />
+              <div className='grid grid-cols-3 gap-2 sm:gap-4 max-w-md mx-auto lg:mx-0'>
+                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-cyan rounded-lg mb-2 mx-auto'>
+                    <Users className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
                   </div>
-                  <h3 className='text-lg font-bold text-white mb-1'>500+</h3>
+                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
+                    500+
+                  </h3>
                   <p className='text-gray-400 text-xs'>Happy Clients</p>
                 </div>
-                <div className='glass-card p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-indigo rounded-lg mb-2 mx-auto'>
-                    <Award className='h-4 w-4 text-white' />
+                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-indigo rounded-lg mb-2 mx-auto'>
+                    <Award className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
                   </div>
-                  <h3 className='text-lg font-bold text-white mb-1'>95%</h3>
+                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
+                    95%
+                  </h3>
                   <p className='text-gray-400 text-xs'>Success Rate</p>
                 </div>
-                <div className='glass-card p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-primary rounded-lg mb-2 mx-auto'>
-                    <Zap className='h-4 w-4 text-white' />
+                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-primary rounded-lg mb-2 mx-auto'>
+                    <Zap className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
                   </div>
-                  <h3 className='text-lg font-bold text-white mb-1'>24/7</h3>
+                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
+                    24/7
+                  </h3>
                   <p className='text-gray-400 text-xs'>Support</p>
                 </div>
               </div>
             </div>
 
-            {/* Hero Image */}
-            <div className='flex justify-center lg:justify-end animate-fade-in'>
+            {/* Hero Image - Hidden on mobile */}
+            <div className='hidden lg:flex justify-center lg:justify-end animate-fade-in'>
               <img
                 src='/hero_image.png'
                 alt='3D Hero Component'
@@ -180,7 +232,7 @@ export default function Home() {
       </section>
 
       {/* Target Audience */}
-      <section className='py-24 relative'>
+      <section className='py-12 sm:py-16 lg:py-24 relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
@@ -239,7 +291,10 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id='services' className='py-24 bg-gradient-dark relative'>
+      <section
+        id='services'
+        className='py-12 sm:py-16 lg:py-24 bg-gradient-dark relative'
+      >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
@@ -356,7 +411,7 @@ export default function Home() {
       </section>
 
       {/* What We Build */}
-      <section className='py-24 relative'>
+      <section className='py-12 sm:py-16 lg:py-24 relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
@@ -455,7 +510,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className='py-24 bg-gradient-dark relative'>
+      <section className='py-12 sm:py-16 lg:py-24 bg-gradient-dark relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
@@ -511,7 +566,7 @@ export default function Home() {
       </section>
 
       {/* Pricing & Contact */}
-      <section className='py-24 relative'>
+      <section className='py-12 sm:py-16 lg:py-24 relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid md:grid-cols-2 gap-16'>
             <div className='animate-slide-up'>
