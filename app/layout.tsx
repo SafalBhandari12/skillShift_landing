@@ -1,30 +1,19 @@
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans, Lora, Roboto } from "next/font/google";
+import { Poppins, Merriweather } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-poppins",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-const openSans = Open_Sans({
+const merriweather = Merriweather({
   subsets: ["latin"],
-  variable: "--font-open-sans",
+  variable: "--font-merriweather",
   display: "swap",
-});
-
-const lora = Lora({
-  subsets: ["latin"],
-  variable: "--font-lora",
-  display: "swap",
-});
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
-  display: "swap",
+  weight: ["300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -43,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${montserrat.variable} ${openSans.variable} ${lora.variable} ${roboto.variable} antialiased`}
+        className={`${poppins.variable} ${merriweather.variable} antialiased`}
       >
         {children}
       </body>

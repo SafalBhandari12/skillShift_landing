@@ -32,34 +32,70 @@
   --color-premium-blue: var(--premium-blue);
   --color-premium-cyan: var(--premium-cyan);
   --color-premium-indigo: var(--premium-indigo);
-  --font-montserrat: var(--font-montserrat);
-  --font-open-sans: var(--font-open-sans);
-  --font-lora: var(--font-lora);
-  --font-roboto: var(--font-roboto);
+  --font-poppins: var(--font-poppins);
+  --font-merriweather: var(--font-merriweather);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  line-height: 1.8;
+  letter-spacing: 0.015em;
+  font-weight: 400;
 }
 
 /* Typography System */
-.font-montserrat {
-  font-family: var(--font-montserrat), sans-serif;
+.font-poppins {
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  letter-spacing: 0.015em;
 }
 
-.font-open-sans {
-  font-family: var(--font-open-sans), sans-serif;
+.font-merriweather {
+  font-family: var(--font-merriweather), Georgia, serif;
+  letter-spacing: 0.025em;
 }
 
-.font-lora {
-  font-family: var(--font-lora), serif;
+/* Premium Typography Classes */
+.font-heading {
+  font-family: var(--font-merriweather), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.4;
 }
 
-.font-roboto {
-  font-family: var(--font-roboto), sans-serif;
+.font-body {
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  line-height: 1.8;
+}
+
+.font-display {
+  font-family: var(--font-merriweather), Georgia, serif;
+  font-weight: 900;
+  letter-spacing: 0.035em;
+  line-height: 1.3;
+}
+
+/* Additional Premium Typography */
+.font-subtitle {
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+.font-caption {
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
 }
 
 /* Custom scrollbar */
