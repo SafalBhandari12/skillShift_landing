@@ -9,11 +9,15 @@ import {
   Globe,
   Heart,
   CheckCircle,
+  Menu,
+  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function About() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -61,7 +65,7 @@ export default function About() {
               </div>
             </div>
             <div className='hidden md:flex items-center space-x-8'>
-              <a
+              <Link
                 href='/'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -69,8 +73,8 @@ export default function About() {
                   Home
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href='/about'
                 className='text-premium-blue font-medium animate-fade-in group'
               >
@@ -78,8 +82,8 @@ export default function About() {
                   About
                   <span className='absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-primary'></span>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href='/contact'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -87,10 +91,61 @@ export default function About() {
                   Contact
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
+              </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className='md:hidden'>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className='text-white hover:text-premium-blue transition-colors'
+              >
+                {isMobileMenuOpen ? (
+                  <X className='h-6 w-6' />
+                ) : (
+                  <Menu className='h-6 w-6' />
+                )}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className='md:hidden fixed inset-0 bg-black/95 backdrop-blur-[25px] z-[9998] flex items-center justify-center'>
+            {/* Close button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className='absolute top-6 right-6 text-white hover:text-premium-blue transition-colors'
+            >
+              <X className='h-8 w-8' />
+            </button>
+
+            <div className='flex flex-col space-y-8 text-center'>
+              <Link
+                href='/'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href='/about'
+                className='text-premium-blue font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href='/contact'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}

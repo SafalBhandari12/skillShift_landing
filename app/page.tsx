@@ -21,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,7 +74,7 @@ export default function Home() {
               </div>
             </div>
             <div className='hidden md:flex items-center space-x-8'>
-              <a
+              <Link
                 href='#home'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -81,9 +82,9 @@ export default function Home() {
                   Home
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href='/about'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -91,8 +92,8 @@ export default function Home() {
                   About
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href='/contact'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -100,7 +101,7 @@ export default function Home() {
                   Contact
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -120,29 +121,37 @@ export default function Home() {
 
           {/* Mobile menu */}
           {isMobileMenuOpen && (
-            <div className='md:hidden absolute top-full left-0 right-0 bg-[rgba(59,130,246,0.95)] backdrop-blur-[25px] mt-4 rounded-2xl p-6 animate-fade-in'>
-              <div className='flex flex-col space-y-4'>
-                <a
+            <div className='md:hidden fixed inset-0 bg-black/95 backdrop-blur-[25px] z-[9998] flex items-center justify-center'>
+              {/* Close button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className='absolute top-6 right-6 text-white hover:text-premium-blue transition-colors'
+              >
+                <X className='h-8 w-8' />
+              </button>
+
+              <div className='flex flex-col space-y-8 text-center'>
+                <Link
                   href='#home'
-                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
-                </a>
-                <a
+                </Link>
+                <Link
                   href='/about'
-                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
-                </a>
-                <a
+                </Link>
+                <Link
                   href='/contact'
-                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
+                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Contact
-                </a>
+                </Link>
               </div>
             </div>
           )}

@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  ArrowRight,
-  Phone,
-  Mail,
-  MessageCircle,
-  Sparkles,
-  Menu,
-  X,
-} from "lucide-react";
+import { ArrowRight, Phone, Mail, Sparkles, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,7 +54,7 @@ export default function Contact() {
               </div>
             </div>
             <div className='hidden md:flex items-center space-x-8'>
-              <a
+              <Link
                 href='/'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -69,9 +62,9 @@ export default function Contact() {
                   Home
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href='/about'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
@@ -79,8 +72,8 @@ export default function Contact() {
                   About
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href='/contact'
                 className='text-premium-blue font-medium animate-fade-in group'
               >
@@ -88,7 +81,7 @@ export default function Contact() {
                   Contact
                   <span className='absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-primary'></span>
                 </span>
-              </a>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -107,34 +100,44 @@ export default function Contact() {
           </div>
 
           {/* Mobile menu */}
-          {isMobileMenuOpen && (
-            <div className='md:hidden absolute top-full left-0 right-0 bg-[rgba(59,130,246,0.95)] backdrop-blur-[25px] mt-4 rounded-2xl p-6 animate-fade-in'>
-              <div className='flex flex-col space-y-4'>
-                <a
-                  href='/'
-                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Home
-                </a>
-                <a
-                  href='/about'
-                  className='text-white hover:text-premium-blue transition-all duration-300 font-medium'
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
-                </a>
-                <a
-                  href='/contact'
-                  className='text-premium-blue font-medium'
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Contact
-                </a>
-              </div>
-            </div>
-          )}
         </div>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className='md:hidden fixed inset-0 bg-black/95 backdrop-blur-[25px] z-[9998] flex items-center justify-center'>
+            {/* Close button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className='absolute top-6 right-6 text-white hover:text-premium-blue transition-colors'
+            >
+              <X className='h-8 w-8' />
+            </button>
+
+            <div className='flex flex-col space-y-8 text-center'>
+              <Link
+                href='/'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href='/about'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href='/contact'
+                className='text-premium-blue font-medium text-2xl'
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Contact Form Section */}
@@ -314,12 +317,12 @@ export default function Contact() {
                   </a>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href='/contact'
                     className='hover:text-premium-blue transition-colors'
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
