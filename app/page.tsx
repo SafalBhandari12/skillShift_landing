@@ -16,10 +16,7 @@ import {
   Globe,
   Shield,
   Heart,
-  ArrowUpRight,
   Play,
-  Menu,
-  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -130,8 +127,8 @@ export default function Home() {
               </h1>
               <p className='text-lg text-gray-300 mb-8 max-w-2xl font-open-sans leading-relaxed'>
                 Our high-impact training interventions, designed to boost
-                productivity, increase efficiency and turn "work" into a
-                super-powered adventure with cutting-edge methodologies.
+                productivity, increase efficiency and turn &quot;work&quot; into
+                a super-powered adventure with cutting-edge methodologies.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 mb-8'>
                 <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
@@ -180,6 +177,8 @@ export default function Home() {
                 src='/hero_image.png'
                 alt='3D Hero Component'
                 className='w-full max-w-lg lg:max-w-xl h-auto object-contain'
+                width={600}
+                height={600}
               />
             </div>
           </div>
@@ -689,7 +688,7 @@ export default function Home() {
                 </h3>
               </div>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
-                We are India's premier training and development company,
+                We are India&apos;s premier training and development company,
                 offering customized learning programs for businesses and
                 organizations at all levels.
               </p>
