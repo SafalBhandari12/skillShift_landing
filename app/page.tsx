@@ -121,65 +121,78 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id='home' className='relative py-32 overflow-hidden'>
+      <section
+        id='home'
+        className='relative h-screen flex items-center justify-center overflow-hidden'
+      >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-          <div className='text-center animate-slide-up'>
-            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-8 animate-scale-in'>
-              <Star className='h-5 w-5 text-premium-blue' />
-              <span className='text-white font-medium'>
-                Premium Training Solutions
-              </span>
-            </div>
-            <h1 className='text-6xl md:text-8xl font-bold text-white mb-8 leading-tight'>
-              We Refine
-              <br />
-              <span className='text-gradient-premium drop-shadow-2xl'>
-                Talents
-              </span>
-            </h1>
-            <p className='text-xl text-gray-300 mb-12 max-w-4xl mx-auto font-open-sans leading-relaxed'>
-              Our high-impact training interventions, designed to boost
-              productivity, increase efficiency and turn "work" into a
-              super-powered adventure with cutting-edge methodologies.
-            </p>
-            <div className='flex flex-col sm:flex-row gap-6 justify-center mb-16'>
-              <button className='bg-gradient-primary text-white px-12 py-5 rounded-xl text-lg font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
-                <span className='flex items-center'>
-                  Start Your Journey
-                  <ArrowRight className='ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform' />
+          <div className='grid lg:grid-cols-2 gap-12 items-center'>
+            {/* Text Content */}
+            <div className='text-left animate-slide-up'>
+              <div className='inline-flex items-center space-x-2 bg-glass-premium px-4 py-2 rounded-full mb-6 animate-scale-in'>
+                <Star className='h-4 w-4 text-blue-400' />
+                <span className='text-white font-medium text-sm'>
+                  Premium Training Solutions
                 </span>
-              </button>
-              <button className='glass-premium border-2 border-premium-blue text-premium-blue px-12 py-5 rounded-xl text-lg font-semibold hover:bg-premium-blue hover:text-white transition-all duration-300 btn-animate group'>
-                <span className='flex items-center'>
-                  <Play className='mr-3 h-5 w-5' />
-                  Watch Demo
-                </span>
-              </button>
+              </div>
+              <h1 className='text-4xl md:text-6xl font-bold text-white mb-6 leading-tight'>
+                We Refine
+                <br />
+                <span className='text-blue-400 drop-shadow-2xl'>Talents</span>
+              </h1>
+              <p className='text-lg text-gray-300 mb-8 max-w-2xl font-open-sans leading-relaxed'>
+                Our high-impact training interventions, designed to boost
+                productivity, increase efficiency and turn "work" into a
+                super-powered adventure with cutting-edge methodologies.
+              </p>
+              <div className='flex flex-col sm:flex-row gap-4 mb-8'>
+                <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
+                  <span className='flex items-center'>
+                    Start Your Journey
+                    <ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
+                  </span>
+                </button>
+                <button className='glass-premium border-2 border-blue-400 text-blue-400 px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 btn-animate group'>
+                  <span className='flex items-center'>
+                    <Play className='mr-2 h-4 w-4' />
+                    Watch Demo
+                  </span>
+                </button>
+              </div>
+
+              {/* Stats */}
+              <div className='grid grid-cols-3 gap-4 max-w-md'>
+                <div className='glass-card p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-cyan rounded-lg mb-2 mx-auto'>
+                    <Users className='h-4 w-4 text-white' />
+                  </div>
+                  <h3 className='text-lg font-bold text-white mb-1'>500+</h3>
+                  <p className='text-gray-400 text-xs'>Happy Clients</p>
+                </div>
+                <div className='glass-card p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-indigo rounded-lg mb-2 mx-auto'>
+                    <Award className='h-4 w-4 text-white' />
+                  </div>
+                  <h3 className='text-lg font-bold text-white mb-1'>95%</h3>
+                  <p className='text-gray-400 text-xs'>Success Rate</p>
+                </div>
+                <div className='glass-card p-4 rounded-xl card-hover'>
+                  <div className='flex items-center justify-center w-8 h-8 bg-gradient-primary rounded-lg mb-2 mx-auto'>
+                    <Zap className='h-4 w-4 text-white' />
+                  </div>
+                  <h3 className='text-lg font-bold text-white mb-1'>24/7</h3>
+                  <p className='text-gray-400 text-xs'>Support</p>
+                </div>
+              </div>
             </div>
 
-            {/* Stats */}
-            <div className='grid md:grid-cols-3 gap-8 max-w-4xl mx-auto'>
-              <div className='glass-card p-6 rounded-2xl card-hover'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mb-4 mx-auto'>
-                  <Users className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-white mb-2'>500+</h3>
-                <p className='text-gray-400'>Happy Clients</p>
-              </div>
-              <div className='glass-card p-6 rounded-2xl card-hover'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mb-4 mx-auto'>
-                  <Award className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-white mb-2'>95%</h3>
-                <p className='text-gray-400'>Success Rate</p>
-              </div>
-              <div className='glass-card p-6 rounded-2xl card-hover'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mb-4 mx-auto'>
-                  <Zap className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-bold text-white mb-2'>24/7</h3>
-                <p className='text-gray-400'>Support</p>
-              </div>
+            {/* Hero Image */}
+            <div className='flex justify-center lg:justify-end animate-fade-in'>
+              <img
+                src='/hero_image.png'
+                alt='3D Hero Component'
+                className='w-full max-w-lg lg:max-w-xl h-auto object-contain'
+              />
             </div>
           </div>
         </div>
