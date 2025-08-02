@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -228,12 +229,13 @@ export default function Home() {
 
             {/* Hero Image - Hidden on mobile */}
             <div className='hidden lg:flex justify-center lg:justify-end animate-fade-in'>
-              <img
+              <Image
                 src='/hero_image.png'
                 alt='3D Hero Component'
-                className='w-full max-w-lg lg:max-w-xl h-auto object-contain'
                 width={600}
                 height={600}
+                className='w-full max-w-lg lg:max-w-xl h-auto object-contain'
+                priority
               />
             </div>
           </div>
