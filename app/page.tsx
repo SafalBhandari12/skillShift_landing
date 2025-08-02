@@ -54,8 +54,10 @@ export default function Home() {
 
       {/* Navigation */}
       <nav
-        className={`glass-premium fixed top-0 left-0 right-0 z-[9999] border-b border-white/20 shadow-lg transition-all duration-500 ease-out ${
-          isScrolled ? "mt-4 mx-4 rounded-2xl" : "mt-0 mx-0"
+        className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ease-out ${
+          isScrolled
+            ? "bg-[rgba(59,130,246,0.05)] backdrop-blur-[25px] shadow-lg mt-4 mx-4 rounded-2xl"
+            : "bg-transparent mt-0 mx-0"
         }`}
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -108,14 +110,6 @@ export default function Home() {
                 </span>
               </a>
             </div>
-            <div className='flex items-center space-x-4'>
-              <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl hover:glow-premium-hover transition-all duration-300 font-semibold btn-animate group'>
-                <span className='flex items-center'>
-                  Get Started
-                  <ArrowUpRight className='ml-2 h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform' />
-                </span>
-              </button>
-            </div>
           </div>
         </div>
       </nav>
@@ -128,13 +122,7 @@ export default function Home() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
           <div className='grid lg:grid-cols-2 gap-12 items-center'>
             {/* Text Content */}
-            <div className='text-left animate-slide-up'>
-              <div className='inline-flex items-center space-x-2 bg-glass-premium px-4 py-2 rounded-full mb-6 animate-scale-in'>
-                <Star className='h-4 w-4 text-blue-400' />
-                <span className='text-white font-medium text-sm'>
-                  Premium Training Solutions
-                </span>
-              </div>
+            <div className='text-left animate-slide-up mt-16'>
               <h1 className='text-4xl md:text-6xl font-bold text-white mb-6 leading-tight'>
                 We Refine
                 <br />
