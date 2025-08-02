@@ -1,0 +1,323 @@
+"use client";
+
+import { ArrowRight, Phone, Mail, MessageCircle, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+
+export default function Contact() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const scrollTop = window.scrollY;
+        setIsScrolled(scrollTop > 30);
+      }, 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+  return (
+    <div className='min-h-screen bg-gradient-dark font-montserrat'>
+      {/* Animated Background Elements */}
+      <div className='fixed inset-0 bg-pattern opacity-30'></div>
+      <div className='absolute top-20 left-10 w-72 h-72 bg-premium-blue/10 rounded-full blur-3xl floating'></div>
+      <div className='absolute top-40 right-20 w-96 h-96 bg-premium-cyan/10 rounded-full blur-3xl floating-delayed'></div>
+      <div className='absolute bottom-20 left-1/4 w-80 h-80 bg-premium-indigo/10 rounded-full blur-3xl floating-slow'></div>
+
+      {/* Navigation */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 ease-out ${
+          isScrolled
+            ? "bg-[rgba(59,130,246,0.05)] backdrop-blur-[25px] shadow-lg mt-4 mx-4 rounded-2xl"
+            : "bg-transparent mt-0 mx-0"
+        }`}
+      >
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='flex justify-between items-center h-20'>
+            <div className='flex items-center'>
+              <div className='flex items-center space-x-2'>
+                <div className='w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center glow-premium'>
+                  <Sparkles className='h-6 w-6 text-white' />
+                </div>
+                <h1 className='text-3xl font-bold text-gradient-premium'>
+                  SkillShift
+                </h1>
+              </div>
+            </div>
+            <div className='hidden md:flex items-center space-x-8'>
+              <a
+                href='/'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
+              >
+                <span className='relative'>
+                  Home
+                  <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
+                </span>
+              </a>
+
+              <a
+                href='/#about'
+                className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
+              >
+                <span className='relative'>
+                  About
+                  <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
+                </span>
+              </a>
+              <a
+                href='/contact'
+                className='text-premium-blue font-medium animate-fade-in group'
+              >
+                <span className='relative'>
+                  Contact
+                  <span className='absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-primary'></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Contact Form Section */}
+      <section className='py-24 relative overflow-hidden min-h-screen flex items-center'>
+        <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full'>
+          <div className='text-center mb-16 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Sparkles className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Get In Touch</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              Ready to Start Your Journey?
+            </h2>
+            <p className='text-xl text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              Book your path to unparalleled growth and excitement as you embark
+              on a journey of skill-building and discovery.
+            </p>
+          </div>
+
+          <div className='grid lg:grid-cols-2 gap-12 items-start'>
+            {/* Contact Form */}
+            <div className='animate-slide-up'>
+              <h3 className='text-2xl font-semibold text-white mb-8'>
+                Send us a message
+              </h3>
+              <form className='glass-premium p-8 rounded-2xl shadow-xl'>
+                <div className='grid md:grid-cols-2 gap-6 mb-6'>
+                  <div className='group'>
+                    <label className='block text-sm font-semibold text-white mb-3 font-roboto group-hover:text-blue-200 transition-colors'>
+                      First Name
+                    </label>
+                    <input
+                      type='text'
+                      className='w-full px-4 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 text-white font-open-sans placeholder-gray-400 transition-all duration-300 hover:bg-white/20'
+                      placeholder='Enter your first name'
+                    />
+                  </div>
+                  <div className='group'>
+                    <label className='block text-sm font-semibold text-white mb-3 font-roboto group-hover:text-blue-200 transition-colors'>
+                      Phone Number
+                    </label>
+                    <input
+                      type='tel'
+                      className='w-full px-4 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 text-white font-open-sans placeholder-gray-400 transition-all duration-300 hover:bg-white/20'
+                      placeholder='Enter your phone number'
+                    />
+                  </div>
+                </div>
+                <div className='mb-6 group'>
+                  <label className='block text-sm font-semibold text-white mb-3 font-roboto group-hover:text-blue-200 transition-colors'>
+                    Email
+                  </label>
+                  <input
+                    type='email'
+                    className='w-full px-4 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 text-white font-open-sans placeholder-gray-400 transition-all duration-300 hover:bg-white/20'
+                    placeholder='Enter your email address'
+                  />
+                </div>
+                <div className='mb-6 group'>
+                  <label className='block text-sm font-semibold text-white mb-3 font-roboto group-hover:text-blue-200 transition-colors'>
+                    Message
+                  </label>
+                  <textarea
+                    rows={4}
+                    className='w-full px-4 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 text-white font-open-sans placeholder-gray-400 transition-all duration-300 hover:bg-white/20 resize-none'
+                    placeholder='Tell us about your requirements...'
+                  />
+                </div>
+                <button
+                  type='submit'
+                  className='w-full bg-gradient-primary text-white py-4 px-8 rounded-xl font-semibold hover:glow-premium-hover transition-all duration-300 text-lg btn-animate group'
+                >
+                  <span className='flex items-center justify-center'>
+                    Submit Application
+                    <ArrowRight className='ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform' />
+                  </span>
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Information */}
+            <div className='animate-slide-up'>
+              <h3 className='text-2xl font-semibold text-white mb-8'>
+                Contact Information
+              </h3>
+              <div className='space-y-6'>
+                <div className='glass-premium p-6 rounded-2xl card-hover group'>
+                  <div className='flex items-center'>
+                    <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mr-4 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                      <Phone className='h-6 w-6 text-white' />
+                    </div>
+                    <div>
+                      <h4 className='text-lg font-semibold text-white mb-1'>
+                        WhatsApp
+                      </h4>
+                      <p className='text-gray-300 font-open-sans'>
+                        +91 8700786057
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='glass-premium p-6 rounded-2xl card-hover group'>
+                  <div className='flex items-center'>
+                    <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mr-4 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                      <Mail className='h-6 w-6 text-white' />
+                    </div>
+                    <div>
+                      <h4 className='text-lg font-semibold text-white mb-1'>
+                        Email
+                      </h4>
+                      <p className='text-gray-300 font-open-sans'>
+                        info@skillshift.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Additional Info */}
+              <div className='mt-8 glass-premium p-6 rounded-2xl'>
+                <h4 className='text-lg font-semibold text-white mb-4'>
+                  Why Choose SkillShift?
+                </h4>
+                <ul className='space-y-3 text-gray-300 font-open-sans'>
+                  <li className='flex items-center'>
+                    <div className='w-2 h-2 bg-premium-blue rounded-full mr-3'></div>
+                    Personalized training solutions
+                  </li>
+                  <li className='flex items-center'>
+                    <div className='w-2 h-2 bg-premium-blue rounded-full mr-3'></div>
+                    Industry expert trainers
+                  </li>
+                  <li className='flex items-center'>
+                    <div className='w-2 h-2 bg-premium-blue rounded-full mr-3'></div>
+                    Flexible scheduling options
+                  </li>
+                  <li className='flex items-center'>
+                    <div className='w-2 h-2 bg-premium-blue rounded-full mr-3'></div>
+                    Comprehensive support
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className='bg-black text-white py-20 border-t border-white/10'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='grid md:grid-cols-4 gap-12'>
+            <div>
+              <div className='flex items-center space-x-2 mb-6'>
+                <div className='w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center glow-premium'>
+                  <Sparkles className='h-6 w-6 text-white' />
+                </div>
+                <h3 className='text-3xl font-bold text-gradient-premium'>
+                  SkillShift
+                </h3>
+              </div>
+              <p className='text-gray-300 font-open-sans leading-relaxed'>
+                We are India&apos;s premier training and development company,
+                offering customized learning programs for businesses and
+                organizations at all levels.
+              </p>
+            </div>
+            <div>
+              <h4 className='text-xl font-semibold mb-6 text-white'>About</h4>
+              <ul className='space-y-3 text-gray-300 font-open-sans'>
+                <li>
+                  <a
+                    href='#'
+                    className='hover:text-premium-blue transition-colors'
+                  >
+                    Our Programs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='/contact'
+                    className='hover:text-premium-blue transition-colors'
+                  >
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className='text-xl font-semibold mb-6 text-white'>
+                Programs
+              </h4>
+              <ul className='space-y-3 text-gray-300 font-open-sans'>
+                <li>
+                  <a
+                    href='#'
+                    className='hover:text-premium-blue transition-colors'
+                  >
+                    Corporate Training
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='#'
+                    className='hover:text-premium-blue transition-colors'
+                  >
+                    Institutional Training
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='#'
+                    className='hover:text-premium-blue transition-colors'
+                  >
+                    Open Workshops
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className='text-xl font-semibold mb-6 text-white'>
+                Get in touch
+              </h4>
+              <ul className='space-y-3 text-gray-300 font-open-sans'>
+                <li>+91 8700786057</li>
+                <li>info@skillshift.com</li>
+              </ul>
+            </div>
+          </div>
+          <div className='divider-premium'></div>
+          <div className='text-center text-gray-300 font-open-sans'>
+            <p>Copyright 2024 © SkillShift | All Rights Reserved</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

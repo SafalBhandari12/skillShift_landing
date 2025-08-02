@@ -79,17 +79,9 @@ export default function Home() {
                   <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
                 </span>
               </a>
+
               <a
-                href='#services'
-                className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
-              >
-                <span className='relative'>
-                  Services
-                  <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full'></span>
-                </span>
-              </a>
-              <a
-                href='#about'
+                href='/about'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
                 <span className='relative'>
@@ -98,7 +90,7 @@ export default function Home() {
                 </span>
               </a>
               <a
-                href='#contact'
+                href='/contact'
                 className='text-white hover:text-premium-blue transition-all duration-300 font-medium animate-fade-in group'
               >
                 <span className='relative'>
@@ -131,12 +123,14 @@ export default function Home() {
                 a super-powered adventure with cutting-edge methodologies.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 mb-8'>
-                <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
-                  <span className='flex items-center'>
-                    Start Your Journey
-                    <ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
-                  </span>
-                </button>
+                <a href='/contact' className='inline-block'>
+                  <button className='bg-gradient-primary text-white px-8 py-3 rounded-xl text-base font-semibold hover:glow-premium-hover transition-all duration-300 flex items-center justify-center btn-animate group'>
+                    <span className='flex items-center'>
+                      Start Your Journey
+                      <ArrowRight className='ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform' />
+                    </span>
+                  </button>
+                </a>
                 <button className='glass-premium border-2 border-blue-400 text-blue-400 px-8 py-3 rounded-xl text-base font-semibold hover:bg-blue-400 hover:text-white transition-all duration-300 btn-animate group'>
                   <span className='flex items-center'>
                     <Play className='mr-2 h-4 w-4' />
@@ -604,73 +598,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section
-        id='contact'
-        className='py-24 bg-gradient-primary relative overflow-hidden'
-      >
-        <div className='absolute inset-0 bg-gradient-to-br from-premium-blue/20 via-transparent to-premium-indigo/20'></div>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
-          <div className='text-center mb-20 animate-slide-up'>
-            <div className='inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-6'>
-              <Sparkles className='h-5 w-5 text-white' />
-              <span className='text-white font-medium'>Ready to Start?</span>
-            </div>
-            <h2 className='text-5xl font-bold text-white mb-8'>
-              Begin Your Adventure Now!
-            </h2>
-            <p className='text-xl text-white/90 max-w-3xl mx-auto font-open-sans'>
-              Book your path to unparalleled growth and excitement as you embark
-              on a journey of skill-building and discovery.
-            </p>
-          </div>
-
-          <form className='glass-premium p-12 rounded-3xl shadow-2xl animate-fade-in'>
-            <div className='grid md:grid-cols-2 gap-8 mb-8'>
-              <div>
-                <label className='block text-sm font-medium text-white mb-3 font-roboto'>
-                  First Name
-                </label>
-                <input
-                  type='text'
-                  className='w-full px-4 py-4 input-premium rounded-xl focus-ring text-white font-open-sans placeholder-gray-400'
-                  placeholder='Enter your first name'
-                />
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-white mb-3 font-roboto'>
-                  Phone Number
-                </label>
-                <input
-                  type='tel'
-                  className='w-full px-4 py-4 input-premium rounded-xl focus-ring text-white font-open-sans placeholder-gray-400'
-                  placeholder='Enter your phone number'
-                />
-              </div>
-            </div>
-            <div className='mb-8'>
-              <label className='block text-sm font-medium text-white mb-3 font-roboto'>
-                Email
-              </label>
-              <input
-                type='email'
-                className='w-full px-4 py-4 input-premium rounded-xl focus-ring text-white font-open-sans placeholder-gray-400'
-                placeholder='Enter your email address'
-              />
-            </div>
-            <button
-              type='submit'
-              className='w-full bg-white text-premium-blue py-4 px-8 rounded-xl font-semibold hover:glow-premium-hover transition-all duration-300 text-lg btn-animate group'
-            >
-              <span className='flex items-center justify-center'>
-                Submit Application
-                <ArrowRight className='ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform' />
-              </span>
-            </button>
-          </form>
         </div>
       </section>
 
