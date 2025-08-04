@@ -831,56 +831,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className='py-12 sm:py-16 lg:py-24 relative'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='text-center mb-20 animate-slide-up'>
-            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
-              <MessageCircle className='h-5 w-5 text-premium-blue' />
-              <span className='text-white font-medium'>Get In Touch</span>
-            </div>
-            <h2 className='text-5xl font-bold text-white mb-8'>Contact Us</h2>
-            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
-              Ready to start your transformation journey? Get in touch with us
-              today.
-            </p>
-          </div>
-          <div className='grid md:grid-cols-3 gap-8'>
-            <div className='flex items-center group'>
-              <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mr-4 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
-                <Phone className='h-6 w-6 text-white' />
-              </div>
-              <div>
-                <p className='text-white font-semibold'>WhatsApp</p>
-                <p className='text-gray-300 font-open-sans'>+91 7027263146</p>
-              </div>
-            </div>
-            <div className='flex items-center group'>
-              <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mr-4 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
-                <Mail className='h-6 w-6 text-white' />
-              </div>
-              <div>
-                <p className='text-white font-semibold'>Email</p>
-                <p className='text-gray-300 font-open-sans'>
-                  neerjaadixitt05@gmail.com
-                </p>
-              </div>
-            </div>
-            <div className='flex items-center group'>
-              <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mr-4 glow-indigo group-hover:glow-indigo-hover transition-all duration-300'>
-                <MessageCircle className='h-6 w-6 text-white' />
-              </div>
-              <div>
-                <p className='text-white font-semibold'>Quick Callback</p>
-                <p className='text-gray-300 font-open-sans'>
-                  Single button for callback - Easy access
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
       <section className='py-20 bg-gradient-dark'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
