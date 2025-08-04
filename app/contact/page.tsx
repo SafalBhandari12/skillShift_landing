@@ -234,7 +234,7 @@ export default function Contact() {
                         WhatsApp
                       </h4>
                       <p className='text-gray-300 font-open-sans'>
-                        +91 8700786057
+                        +91 7027263146
                       </p>
                     </div>
                   </div>
@@ -250,9 +250,52 @@ export default function Contact() {
                         Email
                       </h4>
                       <p className='text-gray-300 font-open-sans'>
-                        info@skillshift.com
+                        neerjaadixitt05@gmail.com
                       </p>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div className='mt-8 glass-premium p-6 rounded-2xl'>
+                <h4 className='text-lg font-semibold text-white mb-4'>
+                  Connect With Us
+                </h4>
+                <div className='space-y-4'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-gray-300 font-open-sans'>
+                      LinkedIn
+                    </span>
+                    <a
+                      href='https://www.linkedin.com/in/neerjadixit/'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='text-premium-blue hover:text-blue-300 transition-colors'
+                    >
+                      @neerjadixit
+                    </a>
+                  </div>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-gray-300 font-open-sans'>
+                      Instagram
+                    </span>
+                    <a
+                      href='https://www.instagram.com/skillshift__/?hl=en'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='text-premium-blue hover:text-blue-300 transition-colors'
+                    >
+                      @skillshift__
+                    </a>
+                  </div>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-gray-300 font-open-sans'>
+                      Location
+                    </span>
+                    <span className='text-gray-300 font-open-sans'>
+                      Sector-52, Gurugram
+                    </span>
                   </div>
                 </div>
               </div>
@@ -362,8 +405,8 @@ export default function Contact() {
                 Get in touch
               </h4>
               <ul className='space-y-3 text-gray-300 font-open-sans'>
-                <li>+91 8700786057</li>
-                <li>info@skillshift.com</li>
+                <li>+91 7027263146</li>
+                <li>neerjaadixitt05@gmail.com</li>
               </ul>
             </div>
           </div>

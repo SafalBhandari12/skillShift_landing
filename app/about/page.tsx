@@ -11,9 +11,11 @@ import {
   CheckCircle,
   Menu,
   X,
+  Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function About() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -164,9 +166,10 @@ export default function About() {
             <p className='text-xl text-gray-300 max-w-4xl mx-auto font-open-sans leading-relaxed'>
               We are India&apos;s premier training and development company,
               offering customized learning programs for businesses and
-              organizations at all levels. Our mission is to transform
-              &quot;work&quot; into a super-powered adventure with cutting-edge
-              methodologies.
+              organizations at all levels. SkillShift provides a one-stop
+              solution for all types of behavioural skills challenges. Be it
+              confidence, public speaking, or communication skills, we help you
+              with a 360-degree transformation.
             </p>
           </div>
         </div>
@@ -367,6 +370,54 @@ export default function About() {
         </div>
       </section>
 
+      {/* Experience & Awards */}
+      <section className='py-24 relative'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Award className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Achievements</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              Experience & Recognition
+            </h2>
+            <p className='text-xl text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              With over 3+ years of experience and 1000+ satisfied clients, we
+              have established ourselves as a trusted partner in professional
+              development.
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-2 gap-8'>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <TrendingUp className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                3+ Years Experience
+              </h3>
+              <p className='text-gray-300 font-open-sans leading-relaxed'>
+                Over three years of delivering high-impact training programs and
+                transforming professionals across various industries.
+              </p>
+            </div>
+
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-cyan rounded-2xl mb-6 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                <Award className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                Trainer's Impact Award 2025
+              </h3>
+              <p className='text-gray-300 font-open-sans leading-relaxed'>
+                Recognized by Trainfluence 2025, Delhi for our exceptional
+                contribution to the training and development industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className='py-24 bg-gradient-dark relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -387,7 +438,7 @@ export default function About() {
           <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
             <div className='glass-premium p-6 rounded-2xl card-hover animate-fade-in'>
               <h3 className='text-xl font-semibold mb-3 text-white'>
-                500+ Happy Clients
+                1000+ Happy Clients
               </h3>
               <p className='text-gray-300 font-open-sans'>
                 Successfully trained professionals across various industries
@@ -437,6 +488,213 @@ export default function About() {
               <p className='text-gray-300 font-open-sans'>
                 Time-tested approaches that deliver consistent results
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Companies */}
+      <section className='py-24 bg-gradient-dark relative'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Users className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Clients</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              Trusted by Leading Companies
+            </h2>
+            <p className='text-xl text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              We have successfully partnered with diverse organizations across
+              various sectors, delivering exceptional training solutions.
+            </p>
+          </div>
+
+          {/* Horizontal Scrolling Logos */}
+          <div className='relative overflow-hidden py-8'>
+            <div className='animate-scroll-horizontal'>
+              {/* First set of logos */}
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/brainlurnconsultancy_logo - Neerja Dixit.jpeg'
+                  alt='Brainlurn Consultancy'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/20240308173330 - Neerja Dixit.jpg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/whsmith_india_logo - Neerja Dixit.jpeg'
+                  alt='WH Smith India'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.png'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/SU logo - Neerja Dixit.png'
+                  alt='Sharda University'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/images - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+
+              {/* Duplicate set for seamless loop */}
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/brainlurnconsultancy_logo - Neerja Dixit.jpeg'
+                  alt='Brainlurn Consultancy'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/20240308173330 - Neerja Dixit.jpg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/whsmith_india_logo - Neerja Dixit.jpeg'
+                  alt='WH Smith India'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.png'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/SU logo - Neerja Dixit.png'
+                  alt='Sharda University'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/images - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Numbers Section */}
+      <section
+        id='animated-numbers'
+        className='py-12 sm:py-16 lg:py-24 bg-gradient-dark relative'
+      >
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Sparkles className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Milestones</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              We've Achieved
+            </h2>
+            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              A journey of excellence, with each milestone a testament to our
+              commitment to quality and innovation.
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-4 gap-8'>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <Users className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>1000+</h3>
+              <p className='text-gray-300 font-open-sans'>Satisfied Clients</p>
+            </div>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-cyan rounded-2xl mb-6 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                <Award className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>95%</h3>
+              <p className='text-gray-300 font-open-sans'>Success Rate</p>
+            </div>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-indigo rounded-2xl mb-6 glow-indigo group-hover:glow-indigo-hover transition-all duration-300'>
+                <Zap className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>7+</h3>
+              <p className='text-gray-300 font-open-sans'>Years Experience</p>
+            </div>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <TrendingUp className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>7+</h3>
+              <p className='text-gray-300 font-open-sans'>Companies</p>
             </div>
           </div>
         </div>
@@ -518,8 +776,8 @@ export default function About() {
                 Get in touch
               </h4>
               <ul className='space-y-3 text-gray-300 font-open-sans'>
-                <li>+91 8700786057</li>
-                <li>info@skillshift.com</li>
+                <li>+91 7027263146</li>
+                <li>neerjaadixitt05@gmail.com</li>
               </ul>
             </div>
           </div>

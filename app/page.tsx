@@ -24,6 +24,76 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+// Animated Number Component
+const AnimatedNumber = ({
+  end,
+  duration = 2000,
+  suffix = "",
+}: {
+  end: number;
+  duration?: number;
+  suffix?: string;
+}) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    const element = document.getElementById("animated-numbers");
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+
+      const currentCount = Math.floor(progress * end);
+      setCount(currentCount);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [isVisible, end, duration]);
+
+  return (
+    <span className='number-display'>
+      {count}
+      {suffix}
+    </span>
+  );
+};
+
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -169,14 +239,15 @@ export default function Home() {
             {/* Text Content */}
             <div className='text-center lg:text-left animate-slide-up mt-8 lg:mt-16'>
               <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight'>
-                We Refine
+                Transform
                 <br />
-                <span className='text-blue-400 drop-shadow-2xl'>Talents</span>
+                <span className='text-blue-400 drop-shadow-2xl'>Potential</span>
               </h1>
               <p className='text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 font-open-sans leading-relaxed'>
-                Our high-impact training interventions, designed to boost
-                productivity, increase efficiency and turn &quot;work&quot; into
-                a super-powered adventure with cutting-edge methodologies.
+                SkillShift provides a one-stop solution for all types of
+                behavioural skills challenges. Be it confidence, public
+                speaking, or communication skills, we help you with a 360-degree
+                transformation.
               </p>
               <div className='flex flex-col sm:flex-row gap-4 mb-8 justify-center lg:justify-start'>
                 <a href='/contact' className='inline-block'>
@@ -193,37 +264,6 @@ export default function Home() {
                     Watch Demo
                   </span>
                 </button>
-              </div>
-
-              {/* Stats */}
-              <div className='grid grid-cols-3 gap-2 sm:gap-4 max-w-md mx-auto lg:mx-0'>
-                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-cyan rounded-lg mb-2 mx-auto'>
-                    <Users className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
-                  </div>
-                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
-                    500+
-                  </h3>
-                  <p className='text-gray-400 text-xs'>Happy Clients</p>
-                </div>
-                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-indigo rounded-lg mb-2 mx-auto'>
-                    <Award className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
-                  </div>
-                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
-                    95%
-                  </h3>
-                  <p className='text-gray-400 text-xs'>Success Rate</p>
-                </div>
-                <div className='glass-card p-3 sm:p-4 rounded-xl card-hover'>
-                  <div className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-gradient-primary rounded-lg mb-2 mx-auto'>
-                    <Zap className='h-3 w-3 sm:h-4 sm:w-4 text-white' />
-                  </div>
-                  <h3 className='text-sm sm:text-lg font-bold text-white mb-1'>
-                    24/7
-                  </h3>
-                  <p className='text-gray-400 text-xs'>Support</p>
-                </div>
               </div>
             </div>
 
@@ -255,7 +295,7 @@ export default function Home() {
             </h2>
             <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
               We work with diverse organizations and individuals to provide
-              comprehensive training solutions tailored to your needs
+              comprehensive training solutions tailored to your needs.
             </p>
           </div>
           <div className='grid md:grid-cols-3 gap-8'>
@@ -264,12 +304,11 @@ export default function Home() {
                 <Target className='h-8 w-8 text-white' />
               </div>
               <h3 className='text-2xl font-semibold mb-4 text-white'>
-                Target Colleges
+                High School Students
               </h3>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
-                Partnering with educational institutions to provide
-                comprehensive training programs that bridge the gap between
-                academia and industry.
+                Building confidence and communication skills early in their
+                academic journey.
               </p>
             </div>
             <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
@@ -277,12 +316,11 @@ export default function Home() {
                 <Users className='h-8 w-8 text-white' />
               </div>
               <h3 className='text-2xl font-semibold mb-4 text-white'>
-                Recent Graduates
+                Recent College Graduates
               </h3>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
-                Supporting fresh graduates transitioning from school to
-                professional life with personalized mentorship and skill
-                development.
+                Supporting fresh graduates transitioning from college to
+                professional life.
               </p>
             </div>
             <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
@@ -290,230 +328,447 @@ export default function Home() {
                 <TrendingUp className='h-8 w-8 text-white' />
               </div>
               <h3 className='text-2xl font-semibold mb-4 text-white'>
-                Corporate Teams
+                Working Professionals & Corporates
               </h3>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
                 Enhancing team performance through targeted soft skills training
-                and leadership development programs.
+                and leadership development.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Experience & Awards */}
+      <section className='py-12 sm:py-16 lg:py-24 bg-gradient-dark relative'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Award className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Achievements</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              Experience & Recognition
+            </h2>
+            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              With over 3+ years of experience and 1000+ satisfied clients, we
+              have established ourselves as a trusted partner in professional
+              development.
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-2 gap-8'>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <TrendingUp className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                3+ Years Experience
+              </h3>
+              <p className='text-gray-300 font-open-sans leading-relaxed'>
+                Over three years of delivering high-impact training programs and
+                transforming professionals across various industries.
+              </p>
+            </div>
+
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-cyan rounded-2xl mb-6 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                <Award className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                Trainer's Impact Award 2025
+              </h3>
+              <p className='text-gray-300 font-open-sans leading-relaxed'>
+                Recognized by Trainfluence 2025, Delhi for our exceptional
+                contribution to the training and development industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Companies */}
+      <section className='py-12 sm:py-16 lg:py-24 relative'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Users className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Clients</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              Trusted by Leading Companies
+            </h2>
+            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              We have successfully partnered with diverse organizations across
+              various sectors, delivering exceptional training solutions.
+            </p>
+          </div>
+
+          {/* Horizontal Scrolling Logos */}
+          <div className='relative overflow-hidden py-8'>
+            <div className='animate-scroll-horizontal'>
+              {/* First set of logos */}
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/brainlurnconsultancy_logo - Neerja Dixit.jpeg'
+                  alt='Brainlurn Consultancy'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/20240308173330 - Neerja Dixit.jpg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/whsmith_india_logo - Neerja Dixit.jpeg'
+                  alt='WH Smith India'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.png'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/SU logo - Neerja Dixit.png'
+                  alt='Sharda University'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/images - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+
+              {/* Duplicate set for seamless loop */}
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/brainlurnconsultancy_logo - Neerja Dixit.jpeg'
+                  alt='Brainlurn Consultancy'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/20240308173330 - Neerja Dixit.jpg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/whsmith_india_logo - Neerja Dixit.jpeg'
+                  alt='WH Smith India'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/download - Neerja Dixit.png'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/SU logo - Neerja Dixit.png'
+                  alt='Sharda University'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+              <div className='logo-container glass-premium rounded-2xl'>
+                <Image
+                  src='/pastcompanies/images - Neerja Dixit.jpeg'
+                  alt='Company Logo'
+                  width={160}
+                  height={100}
+                  className='logo-image'
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Animated Numbers Section */}
       <section
-        id='services'
+        id='animated-numbers'
         className='py-12 sm:py-16 lg:py-24 bg-gradient-dark relative'
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
               <Sparkles className='h-5 w-5 text-premium-blue' />
-              <span className='text-white font-medium'>Our Services</span>
+              <span className='text-white font-medium'>Our Milestones</span>
             </div>
             <h2 className='text-5xl font-bold text-white mb-8'>
-              What We Offer
+              We've Achieved
             </h2>
             <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
-              Currently working with 4-5 businesses and growing. We provide
-              comprehensive solutions for your professional development needs.
+              A journey of excellence, with each milestone a testament to our
+              commitment to quality and innovation.
             </p>
           </div>
 
-          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {/* B2B Services */}
+          <div className='grid md:grid-cols-4 gap-8'>
             <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-              <div className='flex items-center justify-between mb-6'>
-                <h3 className='text-2xl font-semibold text-white'>
-                  B2B Services
-                </h3>
-                <span className='text-sm bg-premium-blue/20 text-premium-blue px-4 py-2 rounded-full font-medium glass'>
-                  Active
-                </span>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <Users className='h-8 w-8 text-white' />
               </div>
-              <ul className='space-y-4 text-gray-300 font-open-sans'>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-blue/20 rounded-full mr-3 group-hover/item:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-blue group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Soft Skills Training</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-blue/20 rounded-full mr-3 group-hover/item:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-blue group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Corporate Training Programs</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-blue/20 rounded-full mr-3 group-hover/item:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-blue group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Team Building Workshops</span>
-                </li>
-              </ul>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                <AnimatedNumber end={1000} />+
+              </h3>
+              <p className='text-gray-300 font-open-sans'>Satisfied Clients</p>
             </div>
-
-            {/* B2C Services */}
             <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-              <div className='flex items-center justify-between mb-6'>
-                <h3 className='text-2xl font-semibold text-white'>
-                  B2C Services
-                </h3>
-                <span className='text-sm bg-premium-cyan/20 text-premium-cyan px-4 py-2 rounded-full font-medium glass'>
-                  Coming Soon
-                </span>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-cyan rounded-2xl mb-6 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                <Award className='h-8 w-8 text-white' />
               </div>
-              <ul className='space-y-4 text-gray-300 font-open-sans'>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-cyan/20 rounded-full mr-3 group-hover/item:bg-premium-cyan transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-cyan group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Individual Mentorship</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-cyan/20 rounded-full mr-3 group-hover/item:bg-premium-cyan transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-cyan group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Personal Development</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-cyan/20 rounded-full mr-3 group-hover/item:bg-premium-cyan transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-cyan group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Career Guidance</span>
-                </li>
-              </ul>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                <AnimatedNumber end={95} />%
+              </h3>
+              <p className='text-gray-300 font-open-sans'>Success Rate</p>
             </div>
-
-            {/* Future Goals */}
             <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-              <div className='flex items-center justify-between mb-6'>
-                <h3 className='text-2xl font-semibold text-white'>
-                  Future Goals
-                </h3>
-                <span className='text-sm bg-premium-indigo/20 text-premium-indigo px-4 py-2 rounded-full font-medium glass'>
-                  Vision
-                </span>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-indigo rounded-2xl mb-6 glow-indigo group-hover:glow-indigo-hover transition-all duration-300'>
+                <Zap className='h-8 w-8 text-white' />
               </div>
-              <ul className='space-y-4 text-gray-300 font-open-sans'>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-indigo/20 rounded-full mr-3 group-hover/item:bg-premium-indigo transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-indigo group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Talent Management</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-indigo/20 rounded-full mr-3 group-hover/item:bg-premium-indigo transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-indigo group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>HR Services</span>
-                </li>
-                <li className='flex items-center group/item'>
-                  <div className='flex items-center justify-center w-6 h-6 bg-premium-indigo/20 rounded-full mr-3 group-hover/item:bg-premium-indigo transition-colors'>
-                    <CheckCircle className='h-4 w-4 text-premium-indigo group-hover/item:text-white transition-colors' />
-                  </div>
-                  <span>Business Consulting</span>
-                </li>
-              </ul>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                <AnimatedNumber end={24} />
+                /7
+              </h3>
+              <p className='text-gray-300 font-open-sans'>Support Hours</p>
+            </div>
+            <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
+              <div className='flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <TrendingUp className='h-8 w-8 text-white' />
+              </div>
+              <h3 className='text-2xl font-semibold mb-4 text-white'>
+                <AnimatedNumber end={3} />+
+              </h3>
+              <p className='text-gray-300 font-open-sans'>Years Experience</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What We Build */}
+      {/* Past Webinars Event */}
       <section className='py-12 sm:py-16 lg:py-24 relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-20 animate-slide-up'>
             <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
-              <Globe className='h-5 w-5 text-premium-blue' />
-              <span className='text-white font-medium'>Our Solutions</span>
+              <Play className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Our Events</span>
             </div>
             <h2 className='text-5xl font-bold text-white mb-8'>
-              What We Build
+              Past Webinars & Events
             </h2>
             <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
-              Comprehensive digital solutions to support your business growth
-              and professional development with cutting-edge technology
+              Take a look at some of our successful webinars and training events
+              that have transformed countless professionals.
             </p>
           </div>
 
-          <div className='grid md:grid-cols-2 gap-8'>
-            <div className='space-y-8'>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mb-4'>
-                  <Globe className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Landing Page
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  Professional website with easy access and premium blue
-                  background design optimized for conversions
-                </p>
+          {/* Horizontal Scrolling Event Images */}
+          <div className='relative overflow-hidden py-8'>
+            <div className='animate-scroll-horizontal-slow'>
+              {/* First set of event images */}
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-15 at 11.19.57_b3cb4a30 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mb-4'>
-                  <Mail className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Business Email
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  Professional email setup and management for your business with
-                  advanced security features
-                </p>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-15 at 11.30.19_e2ab0961 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mb-4'>
-                  <TrendingUp className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Analytics & Marketing
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  Provide analytics and schedule Google ads to save money and
-                  maximize ROI
-                </p>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.36_374ee99a - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
-            </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.36_4611de48 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.35_3263b244 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250731-WA0012 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250731-WA0009 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250728-WA0009 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
 
-            <div className='space-y-8'>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mb-4'>
-                  <Play className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Video Content
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  Schedule video content across all platforms with automated
-                  publishing and optimization
-                </p>
+              {/* Duplicate set for seamless loop */}
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-15 at 11.19.57_b3cb4a30 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mb-4'>
-                  <MessageCircle className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Social Media Marketing
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  AI-powered video creation and SEO optimization for maximum
-                  social media engagement
-                </p>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-15 at 11.30.19_e2ab0961 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
-              <div className='glass-premium p-8 rounded-2xl card-hover animate-fade-in group'>
-                <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mb-4'>
-                  <Shield className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-2xl font-semibold mb-4 text-white'>
-                  Maintenance & Support
-                </h3>
-                <p className='text-gray-300 font-open-sans leading-relaxed'>
-                  Ongoing maintenance and future support services with 24/7
-                  technical assistance
-                </p>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.36_374ee99a - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.36_4611de48 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/WhatsApp Image 2025-07-14 at 16.29.35_3263b244 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250731-WA0012 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250731-WA0009 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
+              </div>
+              <div className='webinar-container'>
+                <Image
+                  src='/pastwebinarsevent/IMG-20250728-WA0009 - Neerja Dixit.jpg'
+                  alt='Webinar Event'
+                  width={400}
+                  height={300}
+                  className='webinar-image'
+                />
               </div>
             </div>
           </div>
@@ -576,99 +831,282 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing & Contact */}
+      {/* Contact */}
       <section className='py-12 sm:py-16 lg:py-24 relative'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='grid md:grid-cols-2 gap-16'>
-            <div className='animate-slide-up'>
-              <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
-                <Heart className='h-5 w-5 text-premium-blue' />
-                <span className='text-white font-medium'>Flexible Pricing</span>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <MessageCircle className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Get In Touch</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>Contact Us</h2>
+            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              Ready to start your transformation journey? Get in touch with us
+              today.
+            </p>
+          </div>
+          <div className='grid md:grid-cols-3 gap-8'>
+            <div className='flex items-center group'>
+              <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mr-4 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
+                <Phone className='h-6 w-6 text-white' />
               </div>
-              <h2 className='text-5xl font-bold text-white mb-8'>
-                Pricing & Negotiation
-              </h2>
-              <p className='text-lg text-gray-300 mb-8 font-open-sans leading-relaxed'>
-                We believe in personalized solutions. Our pricing is flexible
-                and we prefer to have direct conversations to understand your
-                specific needs and create custom packages.
-              </p>
-              <div className='space-y-6'>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-premium-blue/20 rounded-full mr-4 group-hover:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-5 w-5 text-premium-blue group-hover:text-white transition-colors' />
-                  </div>
-                  <span className='text-gray-300 font-open-sans'>
-                    Direct consultation and negotiation
-                  </span>
-                </div>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-premium-blue/20 rounded-full mr-4 group-hover:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-5 w-5 text-premium-blue group-hover:text-white transition-colors' />
-                  </div>
-                  <span className='text-gray-300 font-open-sans'>
-                    Custom package creation
-                  </span>
-                </div>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-8 h-8 bg-premium-blue/20 rounded-full mr-4 group-hover:bg-premium-blue transition-colors'>
-                    <CheckCircle className='h-5 w-5 text-premium-blue group-hover:text-white transition-colors' />
-                  </div>
-                  <span className='text-gray-300 font-open-sans'>
-                    Flexible payment options
-                  </span>
-                </div>
+              <div>
+                <p className='text-white font-semibold'>WhatsApp</p>
+                <p className='text-gray-300 font-open-sans'>+91 7027263146</p>
               </div>
             </div>
-
-            <div className='animate-slide-up'>
-              <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
-                <MessageCircle className='h-5 w-5 text-premium-blue' />
-                <span className='text-white font-medium'>Get In Touch</span>
+            <div className='flex items-center group'>
+              <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mr-4 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
+                <Mail className='h-6 w-6 text-white' />
               </div>
-              <h2 className='text-5xl font-bold text-white mb-8'>Contact Us</h2>
-              <div className='space-y-6'>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-12 h-12 bg-gradient-primary rounded-xl mr-4 glow-premium group-hover:glow-premium-hover transition-all duration-300'>
-                    <Phone className='h-6 w-6 text-white' />
-                  </div>
-                  <div>
-                    <p className='text-white font-semibold'>WhatsApp</p>
-                    <p className='text-gray-300 font-open-sans'>
-                      +91 8700786057
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-12 h-12 bg-gradient-cyan rounded-xl mr-4 glow-cyan group-hover:glow-cyan-hover transition-all duration-300'>
-                    <Mail className='h-6 w-6 text-white' />
-                  </div>
-                  <div>
-                    <p className='text-white font-semibold'>Email</p>
-                    <p className='text-gray-300 font-open-sans'>
-                      info@skillshift.com
-                    </p>
-                  </div>
-                </div>
-                <div className='flex items-center group'>
-                  <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mr-4 glow-indigo group-hover:glow-indigo-hover transition-all duration-300'>
-                    <MessageCircle className='h-6 w-6 text-white' />
-                  </div>
-                  <div>
-                    <p className='text-white font-semibold'>Quick Callback</p>
-                    <p className='text-gray-300 font-open-sans'>
-                      Single button for callback - Easy access
-                    </p>
-                  </div>
-                </div>
+              <div>
+                <p className='text-white font-semibold'>Email</p>
+                <p className='text-gray-300 font-open-sans'>
+                  neerjaadixitt05@gmail.com
+                </p>
+              </div>
+            </div>
+            <div className='flex items-center group'>
+              <div className='flex items-center justify-center w-12 h-12 bg-gradient-indigo rounded-xl mr-4 glow-indigo group-hover:glow-indigo-hover transition-all duration-300'>
+                <MessageCircle className='h-6 w-6 text-white' />
+              </div>
+              <div>
+                <p className='text-white font-semibold'>Quick Callback</p>
+                <p className='text-gray-300 font-open-sans'>
+                  Single button for callback - Easy access
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className='py-20 bg-gradient-dark'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='text-center mb-20 animate-slide-up'>
+            <div className='inline-flex items-center space-x-2 bg-glass-premium px-6 py-3 rounded-full mb-6'>
+              <Star className='h-5 w-5 text-premium-blue' />
+              <span className='text-white font-medium'>Client Feedback</span>
+            </div>
+            <h2 className='text-5xl font-bold text-white mb-8'>
+              What Our Clients Say
+            </h2>
+            <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
+              Hear from professionals who have transformed their skills and
+              careers through our training programs.
+            </p>
+          </div>
+
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {/* Testimonial 1 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Satyendra.jpeg.jpg'
+                  alt='Satyendra Pratap Singh'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Satyendra Pratap Singh</h4>
+                  <p className='testimonial-company'>Trainee at PowerGrid</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "The training session was incredibly engaging and informative.
+                Mam's expertise and real-world examples made the content
+                relatable and applicable to our needs in our organization."
+              </p>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Akshat.jpeg.jpg'
+                  alt='Akshat Gupta'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Akshat Gupta</h4>
+                  <p className='testimonial-company'>Trainee at PowerGrid</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "Mam's ability to connect with our team and tailor the training
+                to our specific challenges was impressive. We saw great
+                improvement in our communication and collaboration skills."
+              </p>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Sudhir.jpeg.jpg'
+                  alt='Sudhir Barala'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Sudhir Barala</h4>
+                  <p className='testimonial-company'>Trainee at PowerGrid</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "The training was interactive, fun, and full of valuable
+                insights. Mam's passion and energy were contagious, and we left
+                feeling motivated and confident."
+              </p>
+            </div>
+
+            {/* Testimonial 4 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Durgesh.jpeg.jpg'
+                  alt='Durgesh Mishra'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Durgesh Mishra</h4>
+                  <p className='testimonial-company'>Trainee at PowerGrid</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "Mam's expertise and guidance helped us bridge my skills gap.
+                The training was well planned and executed; mam took feedback
+                from everyone at the end of her session."
+              </p>
+            </div>
+
+            {/* Testimonial 5 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Sonali.jpeg.jpg'
+                  alt='Sonali Narula'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Sonali Narula</h4>
+                  <p className='testimonial-company'>Student</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "I would like to express my gratitude towards Ms. Neerja Dixit
+                for helping me throughout my journey of learning communication
+                and other soft skills. Previously I was so underconfident but
+                after taking sessions from her i can see a lot of improvement in
+                myself."
+              </p>
+            </div>
+
+            {/* Testimonial 6 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/BHarti.jpg'
+                  alt='Bharti'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Bharti</h4>
+                  <p className='testimonial-company'>Student</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "I had a wonderful full interaction with you. My ability to
+                communicate has improved greatly as a result of the classes.
+                These classes also helped me in developing a different
+                perspective about different situations in life."
+              </p>
+            </div>
+
+            {/* Testimonial 7 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Ruchika.jpeg.jpg'
+                  alt='Ruchika'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Ruchika</h4>
+                  <p className='testimonial-company'>Student</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "As a mentor, she is amazing, and the interactive sessions made
+                learning fun and engaging. I gained confidence and got to know
+                the areas I was weak at and also the strategy to work on them."
+              </p>
+            </div>
+
+            {/* Testimonial 8 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Prathna.jpeg.jpg'
+                  alt='Prathna Dhankar'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Prathna Dhankar</h4>
+                  <p className='testimonial-company'>Student</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "Thank you for helping me shape my personality. I found these
+                classes useful for my personal and professional life. My
+                communication skills have been much better after skill shift
+                classes."
+              </p>
+            </div>
+
+            {/* Testimonial 9 */}
+            <div className='testimonial-card'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src='/testiomonial/Priya.jpeg.jpg'
+                  alt='Priya Rao'
+                  width={80}
+                  height={80}
+                  className='testimonial-image'
+                />
+                <div className='ml-4'>
+                  <h4 className='testimonial-author'>Priya Rao</h4>
+                  <p className='testimonial-company'>Student</p>
+                </div>
+              </div>
+              <p className='testimonial-quote'>
+                "A heartfelt gratitude to Ms Neerja Dixit as she has not just
+                helped me to improve my communication but also my soft skills.
+                With this my confidence, the ability to think, the power to
+                imagine and public speaking has also improved a lot."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className='bg-black text-white py-20 border-t border-white/10'>
+      <footer className='bg-black text-white py-20 border-t border-white/10 select-text'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid md:grid-cols-4 gap-12'>
             <div>
@@ -676,31 +1114,33 @@ export default function Home() {
                 <div className='w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center glow-premium'>
                   <Sparkles className='h-6 w-6 text-white' />
                 </div>
-                <h3 className='text-3xl font-bold text-gradient-premium'>
+                <h3 className='text-3xl font-bold text-gradient-premium select-text'>
                   SkillShift
                 </h3>
               </div>
-              <p className='text-gray-300 font-open-sans leading-relaxed'>
-                We are India&apos;s premier training and development company,
+              <p className='text-gray-300 font-open-sans leading-relaxed select-text'>
+                We are India's premier training and development company,
                 offering customized learning programs for businesses and
                 organizations at all levels.
               </p>
             </div>
             <div>
-              <h4 className='text-xl font-semibold mb-6 text-white'>About</h4>
+              <h4 className='text-xl font-semibold mb-6 text-white select-text'>
+                About
+              </h4>
               <ul className='space-y-3 text-gray-300 font-open-sans'>
-                <li>
+                <li className='select-text'>
                   <a
                     href='#'
-                    className='hover:text-premium-blue transition-colors'
+                    className='hover:text-premium-blue transition-colors select-text'
                   >
                     Our Programs
                   </a>
                 </li>
-                <li>
+                <li className='select-text'>
                   <a
                     href='#'
-                    className='hover:text-premium-blue transition-colors'
+                    className='hover:text-premium-blue transition-colors select-text'
                   >
                     Contact Us
                   </a>
@@ -708,30 +1148,30 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className='text-xl font-semibold mb-6 text-white'>
+              <h4 className='text-xl font-semibold mb-6 text-white select-text'>
                 Programs
               </h4>
               <ul className='space-y-3 text-gray-300 font-open-sans'>
-                <li>
+                <li className='select-text'>
                   <a
                     href='#'
-                    className='hover:text-premium-blue transition-colors'
+                    className='hover:text-premium-blue transition-colors select-text'
                   >
                     Corporate Training
                   </a>
                 </li>
-                <li>
+                <li className='select-text'>
                   <a
                     href='#'
-                    className='hover:text-premium-blue transition-colors'
+                    className='hover:text-premium-blue transition-colors select-text'
                   >
                     Institutional Training
                   </a>
                 </li>
-                <li>
+                <li className='select-text'>
                   <a
                     href='#'
-                    className='hover:text-premium-blue transition-colors'
+                    className='hover:text-premium-blue transition-colors select-text'
                   >
                     Open Workshops
                   </a>
@@ -739,18 +1179,20 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className='text-xl font-semibold mb-6 text-white'>
+              <h4 className='text-xl font-semibold mb-6 text-white select-text'>
                 Get in touch
               </h4>
               <ul className='space-y-3 text-gray-300 font-open-sans'>
-                <li>+91 8700786057</li>
-                <li>info@skillshift.com</li>
+                <li className='select-text'>+91 7027263146</li>
+                <li className='select-text'>neerjaadixitt05@gmail.com</li>
               </ul>
             </div>
           </div>
           <div className='divider-premium'></div>
           <div className='text-center text-gray-300 font-open-sans'>
-            <p>Copyright 2024 © SkillShift | All Rights Reserved</p>
+            <p className='select-text'>
+              Copyright 2024 © SkillShift | All Rights Reserved
+            </p>
           </div>
         </div>
       </footer>
