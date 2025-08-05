@@ -14,7 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "next/link"; 
 import Image from "next/image";
 
 export default function About() {
