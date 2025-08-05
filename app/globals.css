@@ -535,6 +535,45 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Mobile responsive styles for sliding images */
+@media (max-width: 768px) {
+  .webinar-container {
+    width: 250px;
+    height: 180px;
+    padding: 12px;
+  }
+
+  .logo-container {
+    width: 140px;
+    height: 80px;
+    padding: 12px;
+  }
+
+  .animate-scroll-horizontal,
+  .animate-scroll-horizontal-slow {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .webinar-container {
+    width: 200px;
+    height: 150px;
+    padding: 10px;
+  }
+
+  .logo-container {
+    width: 120px;
+    height: 70px;
+    padding: 10px;
+  }
+
+  .animate-scroll-horizontal,
+  .animate-scroll-horizontal-slow {
+    gap: 15px;
+  }
+}
+
 /* Testimonials Section */
 .testimonial-card {
   background: rgba(255, 255, 255, 0.02);
