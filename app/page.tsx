@@ -134,7 +134,7 @@ export default function Home() {
                   alt='SkillShift Logo'
                   width={120}
                   height={120}
-                  className='w-32 h-32 object-contain'
+                  className='w-26 h-26 object-contain'
                   style={{ maxWidth: "none", maxHeight: "none" }}
                 />
               </div>
