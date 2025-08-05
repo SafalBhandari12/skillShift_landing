@@ -14,7 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 import Image from "next/image";
 
 export default function About() {
@@ -58,12 +58,14 @@ export default function About() {
           <div className='flex justify-between items-center h-20'>
             <div className='flex items-center'>
               <div className='flex items-center space-x-2'>
-                <div className='w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center glow-premium'>
-                  <Sparkles className='h-6 w-6 text-white' />
-                </div>
-                <h1 className='text-3xl font-bold text-gradient-premium'>
-                  SkillShift
-                </h1>
+                <Image
+                  src='/logo_without_bg.png'
+                  alt='SkillShift Logo'
+                  width={120}
+                  height={120}
+                  className='w-32 h-32 object-contain'
+                  style={{ maxWidth: "none", maxHeight: "none" }}
+                />
               </div>
             </div>
             <div className='hidden md:flex items-center space-x-8'>
@@ -706,12 +708,14 @@ export default function About() {
           <div className='grid md:grid-cols-4 gap-12'>
             <div>
               <div className='flex items-center space-x-2 mb-6'>
-                <div className='w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center glow-premium'>
-                  <Sparkles className='h-6 w-6 text-white' />
-                </div>
-                <h3 className='text-3xl font-bold text-gradient-premium'>
-                  SkillShift
-                </h3>
+                <Image
+                  src='/logo_without_bg.png'
+                  alt='SkillShift Logo'
+                  width={120}
+                  height={120}
+                  className='w-32 h-32 object-contain'
+                  style={{ maxWidth: "none", maxHeight: "none" }}
+                />
               </div>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
                 We are India&apos;s premier training and development company,
