@@ -2,20 +2,13 @@
 
 import {
   ArrowRight,
-  Phone,
-  Mail,
-  MessageCircle,
   Users,
   Target,
   TrendingUp,
   Award,
-  CheckCircle,
   Sparkles,
   Star,
   Zap,
-  Globe,
-  Shield,
-  Heart,
   Play,
   Menu,
   X,
@@ -376,7 +369,7 @@ export default function Home() {
                 <Award className='h-8 w-8 text-white' />
               </div>
               <h3 className='text-2xl font-semibold mb-4 text-white'>
-                Trainer's Impact Award 2025
+                Trainer&apos;s Impact Award 2025
               </h3>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
                 Recognized by Trainfluence 2025, Delhi for our exceptional
@@ -553,7 +546,7 @@ export default function Home() {
               <span className='text-white font-medium'>Our Milestones</span>
             </div>
             <h2 className='text-5xl font-bold text-white mb-8'>
-              We've Achieved
+              We&apos;ve Achieved
             </h2>
             <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
               A journey of excellence, with each milestone a testament to our
@@ -865,9 +858,10 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "The training session was incredibly engaging and informative.
-                Mam's expertise and real-world examples made the content
-                relatable and applicable to our needs in our organization."
+                &quot;The training session was incredibly engaging and
+                informative. Mam&apos;s expertise and real-world examples made
+                the content relatable and applicable to our needs in our
+                organization.&quot;
               </p>
             </div>
 
@@ -887,9 +881,9 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "Mam's ability to connect with our team and tailor the training
-                to our specific challenges was impressive. We saw great
-                improvement in our communication and collaboration skills."
+                &quot;Mam&apos;s ability to connect with our team and tailor the
+                training to our specific challenges was impressive. We saw great
+                improvement in our communication and collaboration skills.&quot;
               </p>
             </div>
 
@@ -909,9 +903,9 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "The training was interactive, fun, and full of valuable
-                insights. Mam's passion and energy were contagious, and we left
-                feeling motivated and confident."
+                &quot;The training was interactive, fun, and full of valuable
+                insights. Mam&apos;s passion and energy were contagious, and we
+                left feeling motivated and confident.&quot;
               </p>
             </div>
 
@@ -931,9 +925,9 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "Mam's expertise and guidance helped us bridge my skills gap.
-                The training was well planned and executed; mam took feedback
-                from everyone at the end of her session."
+                &quot;Mam&apos;s expertise and guidance helped us bridge my
+                skills gap. The training was well planned and executed; mam took
+                feedback from everyone at the end of her session.&quot;
               </p>
             </div>
 
@@ -953,11 +947,11 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "I would like to express my gratitude towards Ms. Neerja Dixit
-                for helping me throughout my journey of learning communication
-                and other soft skills. Previously I was so underconfident but
-                after taking sessions from her i can see a lot of improvement in
-                myself."
+                &quot;I would like to express my gratitude towards Ms. Neerja
+                Dixit for helping me throughout my journey of learning
+                communication and other soft skills. Previously I was so
+                underconfident but after taking sessions from her i can see a
+                lot of improvement in myself.&quot;
               </p>
             </div>
 
@@ -977,10 +971,10 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "I had a wonderful full interaction with you. My ability to
+                &quot;I had a wonderful full interaction with you. My ability to
                 communicate has improved greatly as a result of the classes.
                 These classes also helped me in developing a different
-                perspective about different situations in life."
+                perspective about different situations in life.&quot;
               </p>
             </div>
 
@@ -1000,9 +994,10 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "As a mentor, she is amazing, and the interactive sessions made
-                learning fun and engaging. I gained confidence and got to know
-                the areas I was weak at and also the strategy to work on them."
+                &quot;As a mentor, she is amazing, and the interactive sessions
+                made learning fun and engaging. I gained confidence and got to
+                know the areas I was weak at and also the strategy to work on
+                them.&quot;
               </p>
             </div>
 
@@ -1022,10 +1017,10 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "Thank you for helping me shape my personality. I found these
-                classes useful for my personal and professional life. My
+                &quot;Thank you for helping me shape my personality. I found
+                these classes useful for my personal and professional life. My
                 communication skills have been much better after skill shift
-                classes."
+                classes.&quot;
               </p>
             </div>
 
@@ -1045,10 +1040,10 @@ export default function Home() {
                 </div>
               </div>
               <p className='testimonial-quote'>
-                "A heartfelt gratitude to Ms Neerja Dixit as she has not just
-                helped me to improve my communication but also my soft skills.
-                With this my confidence, the ability to think, the power to
-                imagine and public speaking has also improved a lot."
+                &quot;A heartfelt gratitude to Ms Neerja Dixit as she has not
+                just helped me to improve my communication but also my soft
+                skills. With this my confidence, the ability to think, the power
+                to imagine and public speaking has also improved a lot.&quot;
               </p>
             </div>
           </div>
@@ -1069,7 +1064,7 @@ export default function Home() {
                 </h3>
               </div>
               <p className='text-gray-300 font-open-sans leading-relaxed select-text'>
-                We are India's premier training and development company,
+                We are India&apos;s premier training and development company,
                 offering customized learning programs for businesses and
                 organizations at all levels.
               </p>

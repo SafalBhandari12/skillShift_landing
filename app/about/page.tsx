@@ -407,7 +407,7 @@ export default function About() {
                 <Award className='h-8 w-8 text-white' />
               </div>
               <h3 className='text-2xl font-semibold mb-4 text-white'>
-                Trainer's Impact Award 2025
+                Trainer&apos;s Impact Award 2025
               </h3>
               <p className='text-gray-300 font-open-sans leading-relaxed'>
                 Recognized by Trainfluence 2025, Delhi for our exceptional
@@ -659,7 +659,7 @@ export default function About() {
               <span className='text-white font-medium'>Our Milestones</span>
             </div>
             <h2 className='text-5xl font-bold text-white mb-8'>
-              We've Achieved
+              We&apos;ve Achieved
             </h2>
             <p className='text-lg text-gray-300 max-w-3xl mx-auto font-open-sans'>
               A journey of excellence, with each milestone a testament to our
